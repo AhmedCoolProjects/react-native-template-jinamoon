@@ -1,15 +1,16 @@
+import { HomeProps } from '@app-screens/types';
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import { IMAGES } from '../constants';
-import { HomeScreenProps } from '../types';
 
-export const Home = (props: HomeScreenProps) => {
+export const Home = (props: HomeProps) => {
   return (
     <View
       style={{
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#000',
       }}>
       <Image
         source={IMAGES.logo}
