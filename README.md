@@ -1,18 +1,33 @@
 # React Native Template JinaMoon
 
-## About the template `main` brance
+## About the template `main` branche
 
-This template was based on `react-native-template-typescript` template
+### What's matter?
 
-### Configured Techs
+- Typescript, ESLINT, PRETTIER and JEST Configured and ready to use
+- Project Structure Well detailed and easy to work with
 
-- Typescript, ESLINT, PRETTIER, JEST
-<!-- - React Navigation
-- Redux
-- Native Base
-- React Native Bootsplash -->
+### Project Structure
 
-### How to start
-
-1. Create project using this template by running:
-   `npx react-native init YouProjectName --template https://github.com/JinaMoon/react-native-template-jinamoon`
+```
+📦src
+ ┣ 📂assets
+ ┃ ┗ 📂images
+ ┃ ┃ ┗ 📜logo.png
+ ┣ 📂components
+ ┃ ┣ 📂cards
+ ┃ ┃ ┗ 📂index.ts
+ ┃ ┣ 📂parts
+ ┃ ┃ ┗ 📜index.ts
+ ┃ ┗ 📜index.ts
+ ┣ 📂constants
+ ┃ ┣ 📜images.ts
+ ┃ ┗ 📜index.ts
+ ┣ 📂screens
+ ┃ ┣ 📜Home.tsx
+ ┃ ┗ 📜index.ts
+ ┣ 📂types
+ ┃ ┣ 📜index.ts
+ ┃ ┗ 📜screens.d.ts
+ ┗ 📜index.tsx
+```
