@@ -1,4 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
+import { NativeBaseProvider } from 'native-base';
 import React from 'react';
 import { LogBox, StatusBar } from 'react-native';
 import { RootNavigation } from './navigation';
@@ -9,10 +10,12 @@ LogBox.ignoreLogs([
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <StatusBar barStyle="default" />
-      <RootNavigation />
-    </NavigationContainer>
+    <NativeBaseProvider>
+      <NavigationContainer>
+        <StatusBar barStyle="default" />
+        <RootNavigation />
+      </NavigationContainer>
+    </NativeBaseProvider>
   );
 };
 

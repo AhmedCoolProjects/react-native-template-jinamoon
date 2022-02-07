@@ -1,15 +1,8 @@
-import {
-  View,
-  Text,
-  Image,
-  Linking,
-  TouchableOpacity,
-  ImageSourcePropType,
-  ScrollView,
-} from 'react-native';
 import React from 'react';
 import { AboutProps } from '@app-screens/types';
 import { IMAGES } from '../constants';
+import { Image, ScrollView, Text, useColorMode } from 'native-base';
+import { Linking, TouchableOpacity } from 'react-native';
 
 type SectionType = {
   onPress: () => void;
@@ -31,48 +24,42 @@ const SECTION = (props: SectionType) => {
         alignItems: 'center',
       }}>
       <Image
+        alt="logo"
+        size={12}
+        resizeMode="cover"
+        borderRadius={50}
+        marginRight={8}
+        source={icon}
         style={{
-          width: 45,
-          height: 45,
-          resizeMode: 'cover',
-          borderRadius: 50,
-          marginRight: 24,
           ...iconStyle,
         }}
-        source={icon}
       />
-
       <Text>{title}</Text>
     </TouchableOpacity>
   );
 };
 
 export const About = (props: AboutProps) => {
+  const { colorMode } = useColorMode();
   return (
     <ScrollView
+      bg={'#fff'}
+      _dark={{
+        bg: '#000',
+      }}
       contentContainerStyle={{
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#000',
         minHeight: '100%',
       }}>
       <Image
-        style={{
-          width: 170,
-          height: 170,
-          resizeMode: 'cover',
-          borderRadius: 100,
-        }}
+        size={170}
+        resizeMode="cover"
+        borderRadius={100}
+        alt="my_image"
         source={IMAGES.me}
       />
-      <Text
-        style={{
-          fontSize: 24,
-          fontWeight: 'bold',
-          color: '#fff',
-          marginTop: 4,
-          marginBottom: 8,
-        }}>
+      <Text fontSize={24} fontWeight="bold" marginY={4}>
         Ahmed Bargady
       </Text>
       <SECTION
@@ -85,7 +72,7 @@ export const About = (props: AboutProps) => {
         icon={IMAGES.github}
         onPress={() => Linking.openURL('https://github.com/AhmedCoolProjects')}
         iconStyle={{
-          tintColor: '#fff',
+          tintColor: colorMode === 'dark' ? '#fff' : '#000',
         }}
       />
       <SECTION
@@ -95,7 +82,7 @@ export const About = (props: AboutProps) => {
           Linking.openURL('https://www.linkedin.com/in/ahmed-bargady')
         }
         iconStyle={{
-          tintColor: '#fff',
+          tintColor: colorMode === 'dark' ? '#fff' : '#000',
         }}
       />
       <SECTION
@@ -103,7 +90,7 @@ export const About = (props: AboutProps) => {
         icon={IMAGES.kaggle}
         onPress={() => Linking.openURL('https://www.kaggle.com/ahmedbargady')}
         iconStyle={{
-          tintColor: '#fff',
+          tintColor: colorMode === 'dark' ? '#fff' : '#000',
         }}
       />
       <SECTION

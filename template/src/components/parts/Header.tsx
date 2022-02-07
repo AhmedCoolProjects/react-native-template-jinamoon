@@ -1,21 +1,28 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import { HeaderProps } from '@app-parts/types';
 import { IMAGES } from '../../constants';
+import { Image, Switch, Text, useColorMode, View } from 'native-base';
+import { TouchableOpacity } from 'react-native';
 
 export const Header = (props: HeaderProps) => {
   const { title, right } = props;
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <View
-      style={{
-        width: '100%',
-        paddingVertical: 12,
-        paddingHorizontal: 24,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        backgroundColor: '#000',
-      }}>
+      _dark={{
+        bg: '#000',
+      }}
+      bg="#fff"
+      width="100%"
+      paddingY={4}
+      paddingX={6}
+      flexDirection="row"
+      justifyContent="space-between"
+      alignItems="center">
+      <Switch
+        isChecked={colorMode === 'dark'}
+        onValueChange={toggleColorMode}
+      />
       <Text
         style={{
           fontSize: 20,
@@ -25,13 +32,11 @@ export const Header = (props: HeaderProps) => {
       </Text>
       <TouchableOpacity onPress={right?.onPress}>
         <Image
+          alt="logo"
           source={IMAGES.logo}
-          style={{
-            height: 32,
-            width: 32,
-            resizeMode: 'cover',
-            borderRadius: 24,
-          }}
+          size={8}
+          resizeMode="cover"
+          borderRadius={16}
         />
       </TouchableOpacity>
     </View>
