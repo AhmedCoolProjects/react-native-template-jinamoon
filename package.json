@@ -1,0 +1,28 @@
+{
+  "name": "react-native-template-jinamoon",
+  "version": "0.0.1",
+  "description": "Configured ready to use template for react native projects",
+  "author": "Ahmed Bargady <ahmed.bargady@outlook.com>",
+  "files": [
+    "template",
+    "template.config.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JinaMoon/react-native-template-jinamoon.git"
+  },
+  "keywords": [
+    "react-native",
+    "typescript",
+    "native-base",
+    "redux",
+    "react-navigation",
+    "template",
+    "boilerplate"
+  ],
+  "bugs": {
+    "url": "https://github.com/JinaMoon/react-native-template-jinamoon.git/issues"
+  },
+  "homepage": "https://github.com/JinaMoon/react-native-template-jinamoon.git#readme",
+  "license": "MIT"
+}
