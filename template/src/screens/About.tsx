@@ -2,7 +2,7 @@ import React from 'react';
 import { AboutProps } from '@app-screens/types';
 import { IMAGES } from '../constants';
 import { Image, ScrollView, Text, useColorMode } from 'native-base';
-import { Linking, TouchableOpacity } from 'react-native';
+import { ImageSourcePropType, Linking, TouchableOpacity } from 'react-native';
 
 type SectionType = {
   onPress: () => void;
