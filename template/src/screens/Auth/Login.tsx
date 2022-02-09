@@ -4,9 +4,6 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { LoginInputs, LoginProps } from '@app-screens/types';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import auth from '@react-native-firebase/auth';
-import { loginAction, useAppSelector } from '../../store';
-import { IMAGES } from '../../constants';
 import { loginFct } from '../../functions';
 
 type InputSectionProps = {

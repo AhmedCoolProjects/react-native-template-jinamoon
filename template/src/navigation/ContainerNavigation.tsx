@@ -3,7 +3,7 @@ import {
   createStackNavigator,
   TransitionPresets,
 } from '@react-navigation/stack';
-import { About, Home } from '../screens';
+import { About, Home, Profile } from '../screens';
 import { Header } from '../components';
 
 const Stack = createStackNavigator();
@@ -32,6 +32,7 @@ export const ContainerNavigation = () => {
         component={Home}
       />
       <Stack.Screen name="About" component={About} />
+      <Stack.Screen name="Profile" component={Profile} />
     </Stack.Navigator>
   );
 };

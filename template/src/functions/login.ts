@@ -11,10 +11,7 @@ export const loginFct = (props: LoginProps) => {
   auth()
     .signInWithEmailAndPassword(email, password)
     .then(userCredential => {
-      Alert.alert(
-        'Great!',
-        `Welcome to Jina Moon,${userCredential.user.displayName}`
-      );
+      Alert.alert('Great!', `Welcome ${userCredential.user.displayName}`);
     })
     .catch(error => {
       // if (error.code === 'auth/user-not-found') {

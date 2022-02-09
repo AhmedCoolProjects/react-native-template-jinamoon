@@ -7,6 +7,7 @@ declare module '@app-screens/types' {
     Login: undefined;
     Register: undefined;
     ForgotPassword: undefined;
+    Profile: undefined;
   };
 
   export type HomeProps = StackScreenProps<RootStackParamListProps, 'Home'>;
@@ -19,6 +20,10 @@ declare module '@app-screens/types' {
   export type ForgotPasswordProps = StackScreenProps<
     RootStackParamListProps,
     'ForgotPassword'
+  >;
+  export type ProfileProps = StackScreenProps<
+    RootStackParamListProps,
+    'Profile'
   >;
   export type LoginInputs = {
     email: string;

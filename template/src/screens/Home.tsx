@@ -1,11 +1,10 @@
 import { HomeProps } from '@app-screens/types';
 import React from 'react';
-import { View, Text, Image } from 'native-base';
+import { View, Text, Image, Button } from 'native-base';
 import { IMAGES } from '../constants';
-import { useAppSelector } from '../store';
 
 export const Home = (props: HomeProps) => {
-  const user = useAppSelector(state => state.user);
+  const { navigation } = props;
   return (
     <View
       flex={1}
@@ -17,16 +16,9 @@ export const Home = (props: HomeProps) => {
       }}>
       <Image alt="logo" source={IMAGES.logo} size={100} />
       <Text style={{ marginTop: 12 }}>Hello Jina Moon, from Home !</Text>
-      <Text>Welcome {user.name}</Text>
-      <Text>{user.email}</Text>
-      <Image
-        alt={user.name}
-        source={{
-          uri: user.photoURL,
-        }}
-        size={12}
-        rounded="full"
-      />
+      <Button mt={4} onPress={() => navigation.navigate('Profile')}>
+        Go to profile
+      </Button>
     </View>
   );
 };

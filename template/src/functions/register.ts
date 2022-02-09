@@ -12,10 +12,12 @@ export const registerFct = (props: RegisterProps) => {
   auth()
     .createUserWithEmailAndPassword(email, password)
     .then(userCredential => {
-      auth().currentUser?.updateProfile({
-        displayName: username,
-      });
-      Alert.alert('Great!', `Welcome ${username}`);
+      auth()
+        .currentUser?.updateProfile({
+          displayName: username,
+        })
+        .then(() => Alert.alert('Great!', `Welcome ${username}`))
+        .catch(error => Alert.alert('Error!', error.message?.split('] ')[1]));
     })
     .catch(error => {
       // if (error.code === 'auth/email-already-in-use') {
