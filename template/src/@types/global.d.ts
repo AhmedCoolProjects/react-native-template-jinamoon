@@ -25,16 +25,12 @@ declare module '@app-screens/types' {
     RootStackParamListProps,
     'Profile'
   >;
-  export type LoginInputs = {
+  export type AuthInputs = {
     email: string;
     password: string;
-  };
-  export type RegisterInputs = {
-    username: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-    gender: string;
+    username?: string;
+    confirmPassword?: string;
+    gender?: string;
   };
 
   export type ForgotPasswordInputs = {

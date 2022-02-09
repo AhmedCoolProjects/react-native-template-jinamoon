@@ -1,17 +1,11 @@
-import { ScrollView, Text, Input, Button, Select, View } from 'native-base';
-import auth from '@react-native-firebase/auth';
+import { ScrollView, Text, Button, Select, View } from 'native-base';
 import React from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { RegisterInputs, RegisterProps } from '@app-screens/types';
+import { AuthInputs, RegisterProps } from '@app-screens/types';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerFct } from '../../functions';
-
-type InputSectionProps = {
-  field: 'email' | 'password' | 'username' | 'confirmPassword' | 'gender';
-  placeholder: string;
-  isSecured?: boolean;
-};
+import { InputSection } from '../../components';
 
 export const Register = (props: RegisterProps) => {
   const { navigation } = props;
@@ -32,7 +26,7 @@ export const Register = (props: RegisterProps) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterInputs>({
+  } = useForm<AuthInputs>({
     defaultValues: {
       username: '',
       email: '',
@@ -42,43 +36,12 @@ export const Register = (props: RegisterProps) => {
     },
     resolver: yupResolver(formSchema),
   });
-  const onSubmit: SubmitHandler<RegisterInputs> = data => {
+  const onSubmit: SubmitHandler<AuthInputs> = data => {
     registerFct({
       email: data.email,
-      username: data.username,
+      username: data.username || 'User',
       password: data.password,
     });
-  };
-
-  const InputSection = (props_local: InputSectionProps) => {
-    const { field, placeholder, isSecured } = props_local;
-    return (
-      <>
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <Input
-              width="85%"
-              placeholder={placeholder}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              mt={2}
-              secureTextEntry={isSecured}
-            />
-          )}
-          name={field}
-        />
-        {errors[field] && (
-          <Text color="red.400" fontSize="xs">
-            {errors[field]?.message}
-          </Text>
-        )}
-      </>
-    );
   };
 
   return (
@@ -95,10 +58,28 @@ export const Register = (props: RegisterProps) => {
       <Text fontSize="3xl" mb={2} fontWeight="bold">
         Register
       </Text>
-      <InputSection field="username" placeholder="Username" />
-      <InputSection field="email" placeholder="Email" />
-      <InputSection field="password" placeholder="Password" isSecured />
       <InputSection
+        control={control}
+        errors={errors}
+        field="username"
+        placeholder="Username"
+      />
+      <InputSection
+        control={control}
+        errors={errors}
+        field="email"
+        placeholder="Email"
+      />
+      <InputSection
+        control={control}
+        errors={errors}
+        field="password"
+        placeholder="Password"
+        isSecured
+      />
+      <InputSection
+        control={control}
+        errors={errors}
         field="confirmPassword"
         placeholder="Confirm Password"
         isSecured

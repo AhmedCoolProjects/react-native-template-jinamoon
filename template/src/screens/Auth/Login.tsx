@@ -1,16 +1,11 @@
-import { ScrollView, Text, Input, Button, View } from 'native-base';
+import { ScrollView, Text, Button, View } from 'native-base';
 import React from 'react';
-import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { LoginInputs, LoginProps } from '@app-screens/types';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { AuthInputs, LoginProps } from '@app-screens/types';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginFct } from '../../functions';
-
-type InputSectionProps = {
-  field: 'email' | 'password';
-  placeholder: string;
-  isSecured?: boolean;
-};
+import { InputSection } from '../../components';
 
 export const Login = (props: LoginProps) => {
   const { navigation } = props;
@@ -24,49 +19,20 @@ export const Login = (props: LoginProps) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginInputs>({
+  } = useForm<AuthInputs>({
     defaultValues: {
       email: '',
       password: '',
     },
     resolver: yupResolver(formSchema),
   });
-  const onSubmit: SubmitHandler<LoginInputs> = data => {
+  const onSubmit: SubmitHandler<AuthInputs> = data => {
     loginFct({
       email: data.email,
       password: data.password,
     });
   };
-  const InputSection = (props_local: InputSectionProps) => {
-    const { field, placeholder, isSecured } = props_local;
-    return (
-      <>
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <Input
-              width="85%"
-              placeholder={placeholder}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              mt={2}
-              secureTextEntry={isSecured}
-            />
-          )}
-          name={field}
-        />
-        {errors[field] && (
-          <Text color="red.400" fontSize="xs">
-            {errors[field]?.message}
-          </Text>
-        )}
-      </>
-    );
-  };
+
   return (
     <ScrollView
       bg={'#fff'}
@@ -81,8 +47,29 @@ export const Login = (props: LoginProps) => {
       <Text fontSize="3xl" mb={2} fontWeight="bold">
         Login
       </Text>
-      <InputSection field="email" placeholder="Email" />
-      <InputSection field="password" placeholder="Password" isSecured />
+      <InputSection
+        field="email"
+        placeholder="Email"
+        control={control}
+        errors={errors}
+      />
+      <InputSection
+        field="password"
+        placeholder="Password"
+        control={control}
+        errors={errors}
+        isSecured
+      />
+      <View flexDirection="row" justifyContent="flex-end" width="80%" mt={2}>
+        <Text fontSize="xs">Forgot password?</Text>
+        <Text
+          fontSize="xs"
+          color="blue.500"
+          ml={2}
+          onPress={() => navigation.navigate('ForgotPassword')}>
+          Reset Password
+        </Text>
+      </View>
       <Button mt={6} onPress={handleSubmit(onSubmit)}>
         Login
       </Button>
