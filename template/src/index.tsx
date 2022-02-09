@@ -3,8 +3,10 @@ import { NativeBaseProvider } from 'native-base';
 import React from 'react';
 import { LogBox, StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+
 import { RootNavigation } from './navigation';
-import { appStore } from './store';
+import { appStore, persistor, useAppSelector } from './store';
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
@@ -13,12 +15,14 @@ LogBox.ignoreLogs([
 const App = () => {
   return (
     <Provider store={appStore}>
-      <NativeBaseProvider>
-        <NavigationContainer>
-          <StatusBar barStyle="default" />
-          <RootNavigation />
-        </NavigationContainer>
-      </NativeBaseProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <NativeBaseProvider>
+          <NavigationContainer>
+            <StatusBar barStyle="default" />
+            <RootNavigation />
+          </NavigationContainer>
+        </NativeBaseProvider>
+      </PersistGate>
     </Provider>
   );
 };

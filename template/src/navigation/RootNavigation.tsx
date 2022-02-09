@@ -1,5 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
+import { useColorMode } from 'native-base';
 import { AuthNavigation } from './AuthNavigation';
 import { ContainerNavigation } from './ContainerNavigation';
 import auth from '@react-native-firebase/auth';
@@ -15,6 +16,8 @@ const Stack = createStackNavigator();
 
 export const RootNavigation = () => {
   const appUser = useAppSelector(state => state.user);
+  const appMode = useAppSelector(state => state.mode);
+  const { setColorMode } = useColorMode();
   const dispatch = useAppDispatch();
   React.useEffect(() => {
     const unsubscribe = auth().onAuthStateChanged(user_local => {
@@ -32,6 +35,9 @@ export const RootNavigation = () => {
     });
     return unsubscribe; // unsubscribe on unmount
   }, [dispatch]);
+  React.useEffect(() => {
+    setColorMode(appMode.appMode);
+  });
   return (
     <Stack.Navigator
       screenOptions={{
