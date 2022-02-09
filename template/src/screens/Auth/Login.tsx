@@ -4,12 +4,17 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { LoginInputs, LoginProps } from '@app-screens/types';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import auth from '@react-native-firebase/auth';
+import { loginAction, useAppSelector } from '../../store';
+import { IMAGES } from '../../constants';
+import { loginFct } from '../../functions';
 
 type InputSectionProps = {
   field: 'email' | 'password';
   placeholder: string;
   isSecured?: boolean;
 };
+
 export const Login = (props: LoginProps) => {
   const { navigation } = props;
   const formSchema = Yup.object().shape({
@@ -29,7 +34,12 @@ export const Login = (props: LoginProps) => {
     },
     resolver: yupResolver(formSchema),
   });
-  const onSubmit: SubmitHandler<LoginInputs> = data => console.log(data);
+  const onSubmit: SubmitHandler<LoginInputs> = data => {
+    loginFct({
+      email: data.email,
+      password: data.password,
+    });
+  };
   const InputSection = (props_local: InputSectionProps) => {
     const { field, placeholder, isSecured } = props_local;
     return (

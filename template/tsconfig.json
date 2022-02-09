@@ -67,6 +67,7 @@
   },
   // "include": ["src"],
   // "typeRoots": ["../node_modules/@types", "../@types"],
+  "typeRoots": ["./src/types"],
   "exclude": [
     "node_modules",
     "babel.config.js",
